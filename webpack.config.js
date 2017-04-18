@@ -45,6 +45,13 @@ let webpack_option = {
                 loader: ExtractTextPlugin.extract({fallback: 'style-loader', use: 'css-loader'}),
             },
             {
+                test: /\.(js|jsx)$/,
+                loader: 'babel-loader',
+                query: {
+                    presets: ['es2015', 'react']
+                }
+            },
+            {
                 test: /\.less$/,
                 //配置less的抽取器、加载器。中间!有必要解释一下，
                 //根据从右到左的顺序依次调用less、css加载器，前一个的输出是后一个的输入
@@ -74,7 +81,7 @@ let webpack_option = {
         new CommonsChunkPlugin({
             name: 'vendors',
             chunk: chunks,
-            minChunks: 3
+            minChunks: 2
         }),
         new ExtractTextPlugin('styles/[name].min.css'),
     ]
