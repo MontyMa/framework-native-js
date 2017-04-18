@@ -17,12 +17,12 @@ let getEntry = (glob_path) => {
 
 
     files.forEach(elem => {
-        entries[elem.split('/')[2]] = elem
+        entries[elem.split('/')[3]] = elem
     });
 
     return entries;
 };
-let entries = getEntry('./views/**/**.js');
+let entries = getEntry('./views/pages/**/**.js');
 
 let chunks = Object.keys(entries);
 
@@ -88,8 +88,8 @@ let generateHtml = (html_path) => {
 
     files_path.forEach(elem => {
 
-        file = elem.split('/')[3];
-        pathname = elem.split('/')[2];
+        file = elem.split('/')[4];
+        pathname = elem.split('/')[3];
 
         option = {
             filename: `./${file}`, //生成的html存放路径，相对于path
@@ -107,7 +107,7 @@ let generateHtml = (html_path) => {
         webpack_option.plugins.push(new HtmlWebpackPlugin(option));
     });
 };
-generateHtml('./views/**/**.html');
+generateHtml('./views/pages/**/**.html');
 
 
 module.exports = webpack_option;
