@@ -33,7 +33,7 @@ console.log(router_config);
 
 router_config.forEach(elem => {
     app.get(elem[0], (req, res) => {
-        res.sendFile(path.join(__dirname, `/views${elem[1]}/index.html`));
+        res.sendFile(path.join(__dirname, `/static${elem[1]}.html`));
     })
 });
 

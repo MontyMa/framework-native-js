@@ -4,7 +4,7 @@
 
 
 let router_config = [
-    ['/', '/home-page'],
+    ['/', '/home'],
     ['/paging', '/paging'],
 ];
 
