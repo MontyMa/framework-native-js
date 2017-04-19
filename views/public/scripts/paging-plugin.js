@@ -2,14 +2,13 @@
  * Created by monty on 2017/4/19.
  */
 
-class Pageing {
+class Paging {
     constructor(name) {
         this.name = name
     }
 
     add(num) {
         console.log(num + 1);
-
         return this;
     }
 
@@ -19,4 +18,4 @@ class Pageing {
     }
 }
 
-export default Pageing
+export default Paging
