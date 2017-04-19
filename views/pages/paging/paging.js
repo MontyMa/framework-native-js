@@ -8,8 +8,13 @@ import Paging from '../../public/scripts/paging-plugin';
 
 import './paging.less';
 
-let data_box = document.querySelector('.data_box');
-let paging_point = document.querySelector('.paging_point');
-
-
+const DATA_BOX = document.querySelector('.data_box');
+const PAGING_POINT = document.querySelector('.paging_point');
+const J_FIXED = document.querySelector('.j_fixed');
+document.querySelector('.j_btn').addEventListener('click', () => {
+    J_FIXED.style.display = 'block';
+});
+J_FIXED.addEventListener('click', () => {
+    J_FIXED.style.display = 'none';
+});
 new Paging("monty").add(2)._replace();
