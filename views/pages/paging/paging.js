@@ -23,3 +23,35 @@ let paging_option = {
     el: 'paging_point',  //挂载点
 
 };
+
+
+{
+
+    let obj = {
+        name: 'monty',
+        age: 26
+    };
+
+    let func = (name) => {
+        console.log(name)
+    };
+
+    Object.defineProperty(obj, 'name', {
+        get(){
+            return `${name} 已发生改变`;
+        },
+        set(val){
+            name = val;
+            func(val);
+        }
+    });
+
+    const J_WATCH_OBJ = document.querySelector('.j_watch_obj');
+
+    J_WATCH_OBJ.addEventListener('click', () => {
+        obj.name = document.body.scrollTop;
+        console.log(obj.name)
+    });
+
+
+}
