@@ -45,7 +45,7 @@ let webpack_option = {
                 loader: ExtractTextPlugin.extract({fallback: 'style-loader', use: 'css-loader'}),
             },
             {
-                test: /\.(js|jsx)$/,
+                test: /\.(js|jsx|vue)$/,
                 loader: 'babel-loader',
                 query: {
                     presets: ['es2015', 'react']

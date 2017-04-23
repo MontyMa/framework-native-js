@@ -6,6 +6,8 @@
 let router_config = [
     ['/', '/home'],
     ['/paging', '/paging'],
+    ['/react', '/react'],
+    ['/vue', '/vue'],
 ];
 
 module.exports = router_config;

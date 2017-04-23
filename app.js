@@ -27,7 +27,7 @@ app.use(express.static(path.join(__dirname, './')));
 
 //配置路由
 
-let router_config = require('./config/router.js');
+let router_config = require('./router.js');
 
 console.log(router_config);
 
