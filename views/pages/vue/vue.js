@@ -3,15 +3,9 @@
  */
 
 import Vue from 'vue';
-// import React from 'react';
-import app from './modules/a.vue';
-
-Vue.config.productionTip = false;
-
-
+import App from './modules/a.vue';
+import '../../public/styles/base.less'
 new Vue({
-    el: '#vue_app',
-    components: {app},
-    template: '<app/>',
-    // template: '<div>hdhdhdhdh</div>',
+    el: '#app',
+    render: template => template(App)
 });

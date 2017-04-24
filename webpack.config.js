@@ -45,11 +45,15 @@ let webpack_option = {
                 loader: ExtractTextPlugin.extract({fallback: 'style-loader', use: 'css-loader'}),
             },
             {
-                test: /\.(js|jsx|vue)$/,
+                test: /\.(js|jsx)$/,
                 loader: 'babel-loader',
                 query: {
                     presets: ['es2015', 'react']
                 }
+            },
+            {
+                test: /\.vue$/,
+                loader: 'vue-loader'
             },
             {
                 test: /\.less$/,
@@ -101,7 +105,6 @@ let generateHtml = (html_path) => {
         option = {
             filename: `./${file}`, //生成的html存放路径，相对于path
             template: elem, //html模板路径
-
             inject: 'body', //js插入的位置，true/'head'/'body'/false
             hash: true, //为静态资源生成hash值
             chunks: ['vendors', pathname],//需要引入的chunk，不配置就会引入所有页面的资源
