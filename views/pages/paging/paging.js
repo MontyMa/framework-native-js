@@ -41,7 +41,7 @@ let paging_option = {
             return `${name} 已发生改变`;
         },
         set(val){
-            name = val;
+            // name = val;
             func(val);
         }
     });

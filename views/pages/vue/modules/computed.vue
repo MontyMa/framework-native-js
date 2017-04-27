@@ -1,7 +1,8 @@
 <template>
     <div>
-        <div>计算后{{_computed}}</div>
+        <div>计算后{{computeds}}</div>
         <input v-model="_computed"/>
+        <input v-model="computeds"/>
     </div>
 </template>
 
@@ -9,18 +10,26 @@
     export default{
         name: 'computed',
         data(){
-            return {}
+            return {
+                computeds: ''
+            }
         },
         computed: {
             _computed: {
                 get(){
-//                    return this.computed_result
-                    console.log(this);
+                    return this.computeds;
                 },
                 set(val){
+                    this.computeds = val;
                     console.log(val);
                 }
             }
+        },
+        methods: {},
+        ready(){
+            console.log(this._computed);
+        },
+        mounted(){
         }
 
     }
