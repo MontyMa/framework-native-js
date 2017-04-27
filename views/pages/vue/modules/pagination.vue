@@ -11,16 +11,32 @@
 </template>
 
 <script>
+    import $ from 'jquery';
     export default{
         name: 'paging',
-        props: ['callback'],
-
+        props: ['option'],
+        data(){
+            return {
+                //请求得出的数据
+                request_data: {}
+            }
+        },
         methods: {
-            runPaging(){
-//                this.callback()
+            //获取数据
+            runRequest(){
+                let option = this.option;
+                $.post(option.url, option.param).done(res => this.getRes = res)
+            }
+        },
+        computed: {
+            getRes: {
+                get(){
+                },
+                set(val){
+                    this.$emit('pagination_data', val)
+                }
             }
         }
-
     }
 </script>
 
