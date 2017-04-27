@@ -3,9 +3,10 @@
  */
 
 import Vue from 'vue';
-import App from './modules/a.vue';
+import App from './app.vue';
 import '../../public/styles/base.less'
 new Vue({
+
     el: '#app',
     render: template => template(App)
 });

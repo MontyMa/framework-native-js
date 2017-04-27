@@ -5,12 +5,15 @@
         <div class="paging_box">
             <paging-plugin :callback="getRequst"></paging-plugin>
         </div>
+
+        <computed-attributes></computed-attributes>
     </div>
 </template>
 
 <script>
-    import PagingPlugin from './paging.vue';
     import $ from 'jquery';
+    import PagingPlugin from './modules/paging.vue';
+    import computedAttributes from './modules/computed.vue';
 
     export default {
         data(){
@@ -18,7 +21,7 @@
                 name: '12131'
             }
         },
-        components: {PagingPlugin},
+        components: {PagingPlugin, computedAttributes},
         methods: {
             getRequst(){
 //                $.post()
