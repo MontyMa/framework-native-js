@@ -3,7 +3,8 @@
  */
 
 import Vue from 'vue';
-import App from './modules/a.vue';
+import '../../public/scripts/directives.js';
+import App from './modules/app.vue';
 import '../../public/styles/base.less'
 new Vue({
     el: '#app',
