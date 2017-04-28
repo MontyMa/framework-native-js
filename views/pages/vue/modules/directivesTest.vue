@@ -1,6 +1,6 @@
 <template>
     <div id="directives">
-        <input v-model="age" v-isNumber="age">
+        <input v-model="age" v-isNumber="age" @keyup.enter="submit">
         <div>年龄{{age}}</div>
     </div>
 </template>
@@ -20,7 +20,6 @@
                 console.log(this.age, 123123);
             },
             getRequst(){
-//                $.post()
             }
         },
         watch: {

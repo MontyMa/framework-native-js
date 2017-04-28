@@ -1,6 +1,7 @@
 /**
  * Created by monty.ma on 17/4/27.
  */
+
 import Vue from 'vue';
 import $ from 'jquery';
 
@@ -32,14 +33,11 @@ Vue.directive('isNumber', {
 //            value = value.replace(reg, '');
 
 //            elem.value = value.replace(reg, '');
-    }
-    ,
+    },
     //被绑定元素所在模板完成一次更新周期时调用
-    componentUpdated()
-    {
+    componentUpdated(){
 
-    }
-    ,
+    },
     //只调用一次， 指令与元素解绑时调用
     unbind(){
 
