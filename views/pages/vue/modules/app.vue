@@ -13,7 +13,7 @@
 
 
     import Vue from 'vue';
-    import PagingPlugin from './paging.vue';
+    import PagingPlugin from './pagination.vue';
     import directivesTest from './directivesTest.vue';
 
     export default {

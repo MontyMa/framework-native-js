@@ -19,10 +19,10 @@ J_FIXED.addEventListener('click', () => {
 //分页配置
 new Paging("monty").add(2)._replace();
 
-let paging_option = {
-    el: 'paging_point',  //挂载点
-
-};
+// let paging_option = {
+//     el: 'paging_point',  //挂载点
+//
+// };
 
 
 {
@@ -41,7 +41,7 @@ let paging_option = {
             return `${name} 已发生改变`;
         },
         set(val){
-            name = val;
+            // name = val;
             func(val);
         }
     });
