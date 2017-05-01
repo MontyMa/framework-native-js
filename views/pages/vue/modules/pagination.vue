@@ -263,7 +263,6 @@
             //发起请求
             getRequest(current){
                 this.getLegitimateData.param.current = current;     //拼合参数
-                console.log(this.getLegitimateData.param);
 
                 $.get(this.getLegitimateData.url).done(response => {
                     this.getPagingNoList(current, response.totalPages);
