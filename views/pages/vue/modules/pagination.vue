@@ -2,7 +2,7 @@
     <div id="pagination">
         <div>{{list_current}}</div>
         <div>{{list_totalPages}}</div>
-        <ul class="pagesize_box">
+        <ul class="pagesize_box" v-if="list_totalPages!==1">
             <li @click="list_current-1>0?onPrevClick(list_current-1):null"
                 v-if="getLegitimateData.prevBtnTxt"
                 class="pagination_list"
@@ -10,9 +10,9 @@
                 {{getLegitimateData.prevBtnTxt}}
             </li>
             <template v-for="(pageNo,index) in template_arr">
-                <li :class="{current_active:pageNo===list_current,pagination_list:pageNo!=='...'}"
-                    @click="pageNo!=='...'?onPageClick(pageNo):null">
-                    {{pageNo}}
+                <li :class="{current_active:pageNo.parameter===list_current,pagination_list:pageNo.txt!=='...'}"
+                    @click="pageNo!=='...'?onPageClick(pageNo.parameter):null">
+                    {{pageNo.txt}}
                 </li>
             </template>
             <li @click="list_current<list_totalPages?onNextClick(list_current+1):null"
@@ -33,19 +33,19 @@
             return {
                 //默认分页配置项
                 default_option: {
-                    current: 1,     //当前页,选填
-                    groups: 3,        //中间显示多少个 选填
-                    prevBtnTxt: '上一页',   //上一页按钮字段:若为false，则不显示上一页  选填
-                    nextBtnTxt: '下一页',   //下一页按钮字段:若为false，则不显示下一页  选填
-                    first: '首页',           //控制首页。值支持三种类型。如：first: '首页',如果不传则默认为'1' 选填
-                    last: '尾页',            //控制尾页。值支持三种类型。如：last: '尾页',如果不传则默认为总页数  选填
-                    hash: false,             //布尔类型，用于刷新还是在当前页面,默认为undefined     选填
-                    param: null,          //向服务器传的参数
-                    url: null,             //请求地址
+                    current: 1,             //当前页   仅支持number类型和可以转化number类型的字符串类型，推荐直接传number类型 必须尾正整数
+                    groups: 3,              //中间显示多少个 仅支持number类型和可以转化number类型的字符串类型，推荐直接传number类型 （必须大于3，小于总页数，推荐 大于3小于等于6，必须尾正整数）
+                    prevBtnTxt: '上一页',      //上一页按钮字段:若为false，则不显示 必须为字符串类型；可选参数。
+                    nextBtnTxt: '下一页',      //下一页按钮字段:若为false，则不显示 必须为字符串类型；可选参数。
+                    first: null,                //控制首页。仅支持字符串类型。如：first: '首页',如果不传则默认为'1'     可选参数
+                    last: null,                 //控制尾页。值支持三种类型。如：last: '尾页',如果不传则默认为总页数      可选参数
+                    hash: false,                //布尔类型，用于刷新还是在当前页面,默认为false,不记住当前页         可选参数
+                    param: null,          //根据需要给后台传传递的参数    ***必须参数***
+                    url: null,            //请求地址   ***必须参数***
                 },
-                template_arr: [],
-                list_current: null,
-                list_totalPages: null,
+                template_arr: [],           //渲染分页dom
+                list_current: null,         //获取当前页
+                list_totalPages: null,      //获取总页数
             }
         },
 
@@ -53,12 +53,9 @@
             //验证参数是否合法
             getLegitimateData(){
                 let option = this.option;
-
                 let must_keys = ['url', 'param'];
-//                let is_must = true;     //上锁 如果必填字段没有传那么以后的程序将不会执行
 
                 must_keys.some(must_keys_elem => {
-
                     let is_hasOwnProperty = option.hasOwnProperty(must_keys_elem);
                     let url_prototype_toString = Object.prototype.toString.call(option['url']);
                     let param_prototype_toString = Object.prototype.toString.call(option['param']);
@@ -68,21 +65,14 @@
                         param_prototype_toString !== '[object Object]' ||
                         option['url'] === '' ||
                         Object.keys(option['param']).length === 0) {
-                        console.log('***********有必填配置没有配置，请检查配置参数***********');
-                        console.log('***********有必填配置没有配置，请检查配置参数***********');
                         throw '***********有必填配置没有配置，请检查配置参数***********'
-//                        is_must = false;
-//                        return is_must;
                     }
                 });
-
-//                if (!is_must) return;       //开锁
 
                 let option_keys = Object.keys(option);
                 let default_option = Object.keys(this.default_option);
                 let new_option = {};
                 let num_keys = ['current', 'groups'];
-
 
                 default_option.forEach(default_option_keys_elem => {
                     if (option_keys.indexOf(default_option_keys_elem) < 0) {
@@ -97,28 +87,51 @@
                         new_option[default_option_keys_elem] = option[default_option_keys_elem];
                     }
                 });
+
                 return new_option;
             },
 
+            //得到当前页
             getCurrent: {
                 get(){
-                    return '';
+                    return this.list_current;
                 },
                 set(current){
                     this.getRequest(current);
                 }
-            }
+            },
 
+            //获取储存的当前页
+            getSessionStorageCurrentPage(){
+                let current_page = sessionStorage.getItem('current_page');
+                let current = this.getLegitimateData.current;
+
+                if (current_page) {
+                    current = parseInt(current_page);
+                } else {
+                    current = parseInt(current);
+                }
+
+                return current
+            },
         },
 
         methods: {
+            //通过事件获取刷新当前页
+            refreshCurrent(new_current){
+                if (new_current === this.getCurrent)return;
+                this.getCurrent = new_current;
+
+                sessionStorage.setItem('current_page', new_current);
+            },
+
             //获取分页需要的渲染内容
             getPagingNoList(current, totalPages){
-                totalPages = parseInt(totalPages);
                 current = parseInt(current);
+                totalPages = parseInt(totalPages);
 
-                this.list_current = current;
                 this.list_totalPages = totalPages;
+                this.list_current = current;
 
                 if (totalPages <= 1) {
                     this.default_option.prevBtnTxt = this.default_option.nextBtnTxt = false;
@@ -126,60 +139,126 @@
                     return
                 }
 
-                let [groups, hash, first, last] = [
+                let [groups, first, last] = [
                     this.getLegitimateData.groups,
-                    this.getLegitimateData.hash,
                     this.getLegitimateData.first,
                     this.getLegitimateData.last,
                 ];
+
+
+                if (first === null) first = 1;
+                if (last === null) last = totalPages;
 
                 let template_arr = [];
 
                 if (totalPages > 1 && totalPages <= 6) {
                     for (let i = 0; i < totalPages; i++) {
-                        template_arr.push(i + 1);
+                        if (i + 1 === 1) {
+                            template_arr.push({
+                                txt: first,
+                                parameter: 1
+                            });
+                        } else if (i + 1 === totalPages) {
+                            template_arr.push({
+                                txt: last,
+                                parameter: i + 1
+                            });
+                        } else {
+                            template_arr.push({
+                                txt: i + 1,
+                                parameter: i + 1
+                            });
+                        }
                     }
+
                     this.template_arr = template_arr;
                     return
                 }
-
-                template_arr = [current];
+                if (current === totalPages) {
+                    template_arr = [{
+                        txt: last,
+                        parameter: current
+                    }];
+                } else if (current === 1) {
+                    template_arr = [{
+                        txt: first,
+                        parameter: current
+                    }];
+                } else {
+                    template_arr = [{
+                        txt: current,
+                        parameter: current
+                    }];
+                }
 
                 for (let i = 1; i < groups; i++) {
                     if (current + i <= totalPages) {
-                        template_arr.push(current + i);
+                        if (current + i === totalPages) {
+                            template_arr.push({
+                                txt: last,
+                                parameter: current + i
+                            });
+                        } else {
+                            template_arr.push({
+                                txt: current + i,
+                                parameter: current + i
+                            });
+                        }
                     }
                 }
 
                 if (current + groups - 1 < totalPages) {
-                    template_arr[groups - 1] = '...';
-                    template_arr.push(totalPages);
+                    template_arr[groups - 1] = {
+                        txt: '...',
+                        parameter: null
+                    };
+                    template_arr.push({
+                        txt: last,
+                        parameter: totalPages
+                    });
                 }
 
                 for (let j = 1; j < groups; j++) {
                     if (current - j > 0) {
-                        template_arr.unshift(current - j);
+
+                        if (current - j === 1) {
+                            template_arr.unshift({
+                                txt: first,
+                                parameter: current - j
+                            });
+                        } else {
+                            template_arr.unshift({
+                                txt: current - j,
+                                parameter: current - j
+                            });
+                        }
                     }
                 }
 
                 if (current - groups + 1 > 1) {
-                    template_arr[0] = '...';
-                    template_arr.unshift(1);
+                    template_arr[0] = {
+                        txt: '...',
+                        parameter: null
+                    };
+                    template_arr.unshift({
+                        txt: first,
+                        parameter: 1
+                    });
                 }
                 this.template_arr = template_arr;
             },
 
             //上一页
             onPrevClick(prev_index){
-                this.getCurrent = prev_index
+                this.refreshCurrent(prev_index);
             },
             //下一页
             onNextClick(next_index){
-                this.getCurrent = next_index
+                this.refreshCurrent(next_index);
             },
             // 点击页码刷新数据
             onPageClick (index) {
-                this.getCurrent = index
+                this.refreshCurrent(index);
             },
             //发起请求
             getRequest(current){
@@ -195,7 +274,16 @@
             }
         },
         beforeMount(){
-            this.getRequest(this.getLegitimateData.current);
+            let hash = this.getLegitimateData.hash;
+
+            if (hash) {
+                this.getRequest(this.getSessionStorageCurrentPage);
+            } else {
+                if (sessionStorage.getItem('current_page')) {
+                    sessionStorage.removeItem('current_page');
+                }
+                this.getRequest(this.getLegitimateData.current);
+            }
         }
     }
 </script>
@@ -220,27 +308,26 @@
                 &:not(:first-child) {
                     margin-left: 6px;
                 }
-
             }
             .pagination_list {
                 cursor: pointer;
-                border-color: #999;
+                border-color: #ddd;
                 &.current_active {
-                    color: #fb5353;
-                    border-color: #fb5353;
+                    color: #f33e33;
+                    border-color: #f33e33;
                 }
                 &.no_user_list {
-                    background-color: #f5f5f5;
-                    border-color: #f5f5f5;
-                    color: #fff;
+                    background-color: #f8f8f8;
+                    color: #aaa;
+                    border-color: #f8f8f8;
                     &:hover {
-                        color: #fff;
-                        border-color: #f5f5f5;
+                        color: #aaa;
+                        border-color: #f8f8f8;
                     }
                 }
                 &:hover {
-                    color: #fb5353;
-                    border-color: #fb5353;
+                    color: #f33e33;
+                    border-color: #f33e33;
                 }
             }
         }
