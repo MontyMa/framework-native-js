@@ -3,7 +3,7 @@
         <div class="title">我是基于Vue的分页插件</div>
         <!--分页插件-->
         <div class="paging_box">
-            <pagination :option="paging_option" @getPageData="pagination_data"></pagination>
+            <pagination :option="paging_option" @pagination_response="getPageData"></pagination>
         </div>
 
         <!--计算器属性研究-->
@@ -21,10 +21,17 @@
             return {
                 //分页配置项
                 paging_option: {
-                    currentPage: 'pageNum', //当前页
-                    totalPages: 'totalPage', //总页数
-                    param: {},          //向服务器传的参数
-                    url: ''             //请求地址
+                    current: 2,     //当前页
+                    groups: 3,        //中间显示多少个
+                    prevBtnTxt: '<',   //上一页按钮字段:若为false，则不显示上一页
+                    nextBtnTxt: '>',   //下一页按钮字段:若为false，则不显示下一页
+//                    first: '首页',           //控制首页。值支持三种类型。如：first: '首页',如果不传则默认为'1'
+//                    last: '尾页',            //控制尾页。值支持三种类型。如：last: '尾页',如果不传则默认为总页数
+//                    hash: true,             //布尔类型，用于刷新还是在当前页面,默认为undefined
+                    param: {
+                        pageSize: 10
+                    },          //向服务器传的参数
+                    url: '/static/json/pagination.json'             //请求地址
                 }
             }
         },
