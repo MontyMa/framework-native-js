@@ -38,10 +38,10 @@ new Paging("monty").add(2)._replace();
 
     Object.defineProperty(obj, 'name', {
         get(){
-            return `${name} 已发生改变`;
+            return `${name} 已发生改变`
         },
         set(val){
-            // name = val;
+            name = val;
             func(val);
         }
     });

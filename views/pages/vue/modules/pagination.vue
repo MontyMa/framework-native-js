@@ -65,7 +65,7 @@
                         param_prototype_toString !== '[object Object]' ||
                         option['url'] === '' ||
                         Object.keys(option['param']).length === 0) {
-                        throw '***********有必填配置没有配置，请检查配置参数***********'
+                        throw '********有必填配置没有配置，请检查配置参数********'
                     }
                 });
 
