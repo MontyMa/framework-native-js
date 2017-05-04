@@ -35,13 +35,12 @@
                 default_option: {
                     current: 1,             //当前页   仅支持number类型和可以转化number类型的字符串类型，推荐直接传number类型 必须尾正整数
                     groups: 3,              //中间显示多少个 仅支持number类型和可以转化number类型的字符串类型，推荐直接传number类型 （必须大于3，小于总页数，推荐 大于3小于等于6，必须尾正整数）
-                    prevBtnTxt: '上一页',      //上一页按钮字段:若为false，则不显示 必须为字符串类型；可选参数。
-                    nextBtnTxt: '下一页',      //下一页按钮字段:若为false，则不显示 必须为字符串类型；可选参数。
+                    prevBtnTxt: '<',      //上一页按钮字段:若为false，则不显示 必须为字符串类型；可选参数。
+                    nextBtnTxt: '>',      //下一页按钮字段:若为false，则不显示 必须为字符串类型；可选参数。
                     first: null,                //控制首页。仅支持字符串类型。如：first: '首页',如果不传则默认为'1'     可选参数
                     last: null,                 //控制尾页。值支持三种类型。如：last: '尾页',如果不传则默认为总页数      可选参数
                     hash: false,                //布尔类型，用于刷新还是在当前页面,默认为false,不记住当前页         可选参数
-                    param: null,          //根据需要给后台传传递的参数    ***必须参数***
-                    url: null,            //请求地址   ***必须参数***
+                    totalPages: '',         //***必传参数***    并且默认值为null
                 },
                 template_arr: [],           //渲染分页dom
                 list_current: null,         //获取当前页
@@ -53,40 +52,39 @@
             //验证参数是否合法
             getLegitimateData(){
                 let option = this.option;
-                let must_keys = ['url', 'param'];
+                let totalPages = option.totalPages;
+                let new_option = {};
 
-                must_keys.some(must_keys_elem => {
-                    let is_hasOwnProperty = option.hasOwnProperty(must_keys_elem);
-                    let url_prototype_toString = Object.prototype.toString.call(option['url']);
-                    let param_prototype_toString = Object.prototype.toString.call(option['param']);
+//                return new_option;
 
-                    if (!is_hasOwnProperty ||
-                        url_prototype_toString !== '[object String]' ||
-                        param_prototype_toString !== '[object Object]' ||
-                        option['url'] === '' ||
-                        Object.keys(option['param']).length === 0) {
-                        throw '***********有必填配置没有配置，请检查配置参数***********'
-                    }
-                });
+//                if (!totalPages) return 'werwe';
+
+                if (!option.hasOwnProperty('totalPages')) {
+                    throw '****** totalPages 为必传参数，请务必传参******'
+                }
+
+//                if (!parseInt(totalPages)) {
+//                    throw '****** totalPages 传入类型不对，请改正******'
+//                }
 
                 let option_keys = Object.keys(option);
-                let default_option = Object.keys(this.default_option);
-                let new_option = {};
-                let num_keys = ['current', 'groups'];
+                let default_keys = Object.keys(this.default_option);
 
-                default_option.forEach(default_option_keys_elem => {
-                    if (option_keys.indexOf(default_option_keys_elem) < 0) {
-                        new_option[default_option_keys_elem] = this.default_option[default_option_keys_elem]
-                    } else if (num_keys.indexOf(default_option_keys_elem) >= 0) {
-                        if (parseInt(option[default_option_keys_elem])) {
-                            new_option[default_option_keys_elem] = parseInt(option[default_option_keys_elem]);
-                        } else {
-                            throw `${default_option_keys_elem}:类型不对,请修改...`
-                        }
-                    } else {
-                        new_option[default_option_keys_elem] = option[default_option_keys_elem];
+                option_keys.forEach(elem => {
+                    if (default_keys.indexOf(elem) < 0) {
+                        throw `**** ${elem} 无效或错传，请检查****`
+                    }
+
+                    if (elem === 'hash' && Object.prototype.toString.call(option[elem]) !== '[object Boolean]') {
+                        throw `**** ${elem} 类型为Boolean，请检查****`
                     }
                 });
+
+                default_keys.forEach(elem => {
+                    new_option[elem] = option_keys.indexOf(elem) < 0 ? this.default_option[elem] : option[elem];
+                });
+
+                console.log(new_option);
 
                 return new_option;
             },
@@ -273,16 +271,18 @@
             }
         },
         beforeMount(){
-            let hash = this.getLegitimateData.hash;
+            let hash = this.getLegitimateData;
 
-            if (hash) {
-                this.getRequest(this.getSessionStorageCurrentPage);
-            } else {
-                if (sessionStorage.getItem('current_page')) {
-                    sessionStorage.removeItem('current_page');
-                }
-                this.getRequest(this.getLegitimateData.current);
-            }
+            console.log(hash);
+//            return
+//            if (hash) {
+//                this.getRequest(this.getSessionStorageCurrentPage);
+//            } else {
+//                if (sessionStorage.getItem('current_page')) {
+//                    sessionStorage.removeItem('current_page');
+//                }
+//                this.getRequest(this.getLegitimateData.current);
+//            }
         }
     }
 </script>
