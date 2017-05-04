@@ -1,5 +1,6 @@
 <template>
     <div id="pagination">
+        <div>{{total}}</div>
         <div>{{list_current}}</div>
         <div>{{list_totalPages}}</div>
         <ul class="pagesize_box" v-if="list_totalPages!==1">
@@ -28,7 +29,7 @@
     import $ from 'jquery';
     export default{
         name: 'pagination',
-        props: ['option'],
+        props: ['option', 'ajax', 'total'],
         data(){
             return {
                 //默认分页配置项
@@ -40,8 +41,8 @@
                     first: null,                //控制首页。仅支持字符串类型。如：first: '首页',如果不传则默认为'1'     可选参数
                     last: null,                 //控制尾页。值支持三种类型。如：last: '尾页',如果不传则默认为总页数      可选参数
                     hash: false,                //布尔类型，用于刷新还是在当前页面,默认为false,不记住当前页         可选参数
-                    totalPages: '',         //***必传参数***    并且默认值为null
                 },
+                totalPages: null,
                 template_arr: [],           //渲染分页dom
                 list_current: null,         //获取当前页
                 list_totalPages: null,      //获取总页数
@@ -49,42 +50,30 @@
         },
 
         computed: {
+//            getTotalPages: {
+//                set(val){
+////                    this.totalPages = val;
+//                },
+//                get(){
+//                    return this.total
+//                }
+//            },
             //验证参数是否合法
             getLegitimateData(){
                 let option = this.option;
-                let totalPages = option.totalPages;
+                let total = this.total;
+
                 let new_option = {};
-
-//                return new_option;
-
-//                if (!totalPages) return 'werwe';
-
-                if (!option.hasOwnProperty('totalPages')) {
-                    throw '****** totalPages 为必传参数，请务必传参******'
-                }
-
-//                if (!parseInt(totalPages)) {
-//                    throw '****** totalPages 传入类型不对，请改正******'
-//                }
-
                 let option_keys = Object.keys(option);
                 let default_keys = Object.keys(this.default_option);
 
-                option_keys.forEach(elem => {
-                    if (default_keys.indexOf(elem) < 0) {
-                        throw `**** ${elem} 无效或错传，请检查****`
-                    }
-
-                    if (elem === 'hash' && Object.prototype.toString.call(option[elem]) !== '[object Boolean]') {
-                        throw `**** ${elem} 类型为Boolean，请检查****`
-                    }
-                });
+                console.log(total, 'ajax2');
 
                 default_keys.forEach(elem => {
                     new_option[elem] = option_keys.indexOf(elem) < 0 ? this.default_option[elem] : option[elem];
                 });
 
-                console.log(new_option);
+                new_option.total = this.total;
 
                 return new_option;
             },
@@ -103,7 +92,6 @@
             getSessionStorageCurrentPage(){
                 let current_page = sessionStorage.getItem('current_page');
                 let current = this.getLegitimateData.current;
-
                 if (current_page) {
                     current = parseInt(current_page);
                 } else {
@@ -113,13 +101,17 @@
                 return current
             },
         },
-
+        watch: {
+            total(val){
+                this.totalPages = val;
+                console.log(val, 'niambi');
+            }
+        },
         methods: {
             //通过事件获取刷新当前页
             refreshCurrent(new_current){
                 if (new_current === this.getCurrent)return;
                 this.getCurrent = new_current;
-
                 sessionStorage.setItem('current_page', new_current);
             },
 
@@ -128,6 +120,7 @@
                 current = parseInt(current);
                 totalPages = parseInt(totalPages);
 
+                console.log(totalPages, 0);
                 this.list_totalPages = totalPages;
                 this.list_current = current;
 
@@ -260,29 +253,21 @@
             },
             //发起请求
             getRequest(current){
-                this.getLegitimateData.param.current = current;     //拼合参数
-
-                $.get(this.getLegitimateData.url).done(response => {
-                    this.getPagingNoList(current, response.totalPages);
-
-                    //原封不动的导出请求数据
-                    this.$emit('pagination_response', response)
-                })
+                if (this.ajax && this.ajax(current).done) {
+                    setTimeout(() => this.getPagingNoList(current, this.total))
+                }
             }
         },
         beforeMount(){
-            let hash = this.getLegitimateData;
-
-            console.log(hash);
-//            return
-//            if (hash) {
-//                this.getRequest(this.getSessionStorageCurrentPage);
-//            } else {
-//                if (sessionStorage.getItem('current_page')) {
-//                    sessionStorage.removeItem('current_page');
-//                }
-//                this.getRequest(this.getLegitimateData.current);
-//            }
+            let hash = this.getLegitimateData.hash;
+            if (hash) {
+                this.getRequest(this.getSessionStorageCurrentPage);
+            } else {
+                if (sessionStorage.getItem('current_page')) {
+                    sessionStorage.removeItem('current_page');
+                }
+                this.getRequest(this.getLegitimateData.current);
+            }
         }
     }
 </script>
