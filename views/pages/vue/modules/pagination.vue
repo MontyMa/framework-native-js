@@ -1,8 +1,8 @@
 <template>
     <div id="pagination">
-        <!--<div>{{total}}</div>-->
-        <!--<div>{{list_current}}</div>-->
-        <!--<div>{{list_totalPages}}</div>-->
+        <div>{{total}}</div>
+        <div>{{list_current}}</div>
+        <div>{{list_totalPages}}</div>
         <ul class="pagesize_box" v-if="list_totalPages!==1">
             <li @click="list_current-1>0?onPrevClick(list_current-1):null" v-if="prev_btn_txt" class="pagination_list" :class="{no_user_list:list_current-1<=0}">
                 {{prev_btn_txt}}
@@ -19,11 +19,10 @@
     </div>
 </template>
 <script>
-import $ from 'jquery';
 export default {
     name: 'pagination',
     props: {
-        total: {
+        total: {                // 总页数 必传
             type: [String, Number],
             required: true,
         },
@@ -37,11 +36,11 @@ export default {
         },
         first: {                //控制首页。仅支持字符串类型。如：first: '首页',如果不传则默认为'1'     可选参数
             type: [String, Boolean],
-            default: null
+            default: false
         },
         last: {                 //控制尾页。值支持三种类型。如：last: '尾页',如果不传则默认为总页数      可选参数
             type: [String, Boolean],
-            default: null
+            default: false
         },
         prev_btn_txt: {         //上一页按钮字段:若为false，则不显示 必须为字符串类型；可选参数。
             type: [String, Boolean],
@@ -69,18 +68,16 @@ export default {
                 return this.list_current;
             },
             set(current) {
-                this.$emit('current_page', current);
+                this.$emit('current', current);
                 this.list_current = current;
             }
         },
 
         // 生成分页渲染需要的数据
         getPagingNoList() {
-            let current, totalPages;
-            current = parseInt(this.getCurrent);
-            totalPages = parseInt(this.total);
 
-            console.log(current, 'current');
+            let current = parseInt(this.getCurrent),
+                totalPages = parseInt(this.total);
 
             this.list_totalPages = totalPages;
             this.list_current = current;
@@ -96,10 +93,8 @@ export default {
                 this.last,
             ];
 
-            console.log(groups, first, last)
-
-            if (first === null) first = 1;
-            if (last === null) last = totalPages;
+            if (!first) first = 1;
+            if (!last) last = totalPages;
 
             let template_arr = [];
 
@@ -204,7 +199,6 @@ export default {
         refreshCurrent(new_current) {
             if (new_current === this.getCurrent) return;
             this.getCurrent = new_current;
-            sessionStorage.setItem('current_page', new_current);
         },
 
         //上一页
@@ -222,7 +216,7 @@ export default {
     },
 
     created() {
-        this.$emit('current_page', this.list_current);
+        this.$emit('current', this.list_current);
     }
 }
 </script>

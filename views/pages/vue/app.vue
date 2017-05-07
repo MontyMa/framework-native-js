@@ -3,7 +3,7 @@
         <div class="title">我是基于Vue的分页插件</div>
         <!--分页插件-->
         <div class="paging_box">
-            <pagination @current_page='getResponse' :total="total_pages" :current='2'></pagination>
+            <pagination @current='getResponse' :total="total_pages" :current='2'></pagination>
         </div>
     
         <!--计算器属性研究-->
@@ -15,7 +15,6 @@
 import $ from 'jquery';
 import computedAttributes from './modules/computed.vue';
 import pagination from './modules/pagination.vue';  //分页
-
 export default {
     data() {
         return {
