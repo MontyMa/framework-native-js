@@ -33,8 +33,7 @@ export default {
                 pageSize: 10,
                 pageNo: current
             }
-            console.log(param);
-
+            
             let url = '/static/json/pagination.json';
 
             $.get(url).done(res => {
