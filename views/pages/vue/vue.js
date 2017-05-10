@@ -7,7 +7,9 @@ import App from './app.vue';
 import '../../public/scripts/directives.js';
 import '../../public/styles/base.less'
 import './vue.less';
+import store from '../../vuex/store.js';
 new Vue({
     el: '#app',
+    store,
     render: template => template(App)
 });

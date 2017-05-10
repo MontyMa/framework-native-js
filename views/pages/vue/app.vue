@@ -5,7 +5,9 @@
         <div class="paging_box">
             <pagination @current='getResponse' :total="total_pages" :current='2'></pagination>
         </div>
+        <div>{{getTest}}</div>
 
+        <input type="button" value="click" @click="onClick">
         <!--计算器属性研究-->
         <computed-attributes></computed-attributes>
     </div>
@@ -14,11 +16,16 @@
 <script>
     import $ from 'jquery';
     import computedAttributes from './modules/computed.vue';
-    import pagination from './modules/pagination.vue';  //分页
+    import pagination from '../../public/components/pagination.vue';  //分页
     export default {
         data() {
             return {
-                total_pages: ''
+                total_pages: '',
+            }
+        },
+        computed: {
+            getTest(){
+                return this.$store.getters.is_success;
             }
         },
         components: {pagination, computedAttributes},
@@ -37,10 +44,14 @@
                     this.total_pages = res.totalPages;
                 })
             },
+            onClick(){
+                this.$store.dispatch('update', !this.getTest);
+            }
         },
-        created() {
-            // this.getResponse();
+        mounted(){
+            console.log(this.$store.getters.is_success);
         }
+
     }
 </script>
 
