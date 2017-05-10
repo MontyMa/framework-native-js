@@ -3,6 +3,24 @@
  */
 
 import $ from 'jquery';
-
 import './home.less';
-console.log('home-page');
+
+let url = '/static/json/pagination.json';
+
+let total = '',
+    status = false;
+
+function getStatus() {
+    status = true
+}
+
+$.get(url).done(res => {
+    total = res.totalPages;
+    getStatus();
+});
+
+setTimeout(() => {
+    if (status) {
+        console.log(total);
+    }
+});
