@@ -8,6 +8,10 @@
         <div>{{getTest}}</div>
 
         <input type="button" value="click" @click="onClick">
+
+        <div>{{getTxt}}</div>
+        <input type="button" value="点我改变为'按钮1'" @click="onClick1('按钮1')">
+        <input type="button" value="点我改变为'按钮2'" @click="onClick1('按钮2')">
         <!--计算器属性研究-->
         <computed-attributes></computed-attributes>
     </div>
@@ -26,6 +30,9 @@
         computed: {
             getTest(){
                 return this.$store.getters.is_success;
+            },
+            getTxt(){
+                return this.$store.getters.test_state;
             }
         },
         components: {pagination, computedAttributes},
@@ -45,7 +52,10 @@
                 })
             },
             onClick(){
-                this.$store.dispatch('update', !this.getTest);
+                this.$store.dispatch('sub_is_success', !this.getTest);
+            },
+            onClick1(txt){
+                this.$store.dispatch('sub_test_state', txt);
             }
         },
         mounted(){

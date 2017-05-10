@@ -8,31 +8,36 @@ Vue.use(Vuex);      //告诉vue使用vuex
 
 // 创建一个对象来保存应用启动时的初始状态
 const state = {
-    // TODO: 放置初始状态
     isSuccess: true,
-    
+    testState: '我是测试默认值'
 };
 
 // 创建一个对象存储一系列我们接下来要写的 mutation 函数
 const mutations = {
-    // TODO: 放置我们的状态变更函数
-    update(state, val){
-        console.log(state, 'state');
-        console.log(val, 'val');
+    UPDATE_ISSUCCESS(state, val){
         state.isSuccess = val;
+    },
+    UPDATE_TESTSTATE(state, val){
+        state.testState = val
     }
 };
 
 const getters = {
-    is_success(state, val){
+    is_success(state){
         return state.isSuccess;
+    },
+    test_state(state){
+        return state.testState;
     }
 };
 
 const actions = {
-    update({commit}, val){           //是dispatch订阅key
-        commit('update', val)
-    }
+    sub_is_success({commit}, val){              //是dispatch订阅key
+        commit('UPDATE_ISSUCCESS', val)           // 'update' 是mutations里的key
+    },
+    sub_test_state({commit}, val){              //是dispatch订阅key
+        commit('UPDATE_TESTSTATE', val)           // 'update' 是mutations里的key
+    },
 };
 
 export default new Vuex.Store({
