@@ -4,119 +4,100 @@
         <div>{{list_current}}</div>
         <div>{{list_totalPages}}</div>
         <ul class="pagesize_box" v-if="list_totalPages!==1">
-            <li @click="list_current-1>0?onPrevClick(list_current-1):null"
-                v-if="getLegitimateData.prevBtnTxt"
-                class="pagination_list"
+            <li @click="list_current-1>0?onPrevClick(list_current-1):null" v-if="prev_btn_txt" class="pagination_list"
                 :class="{no_user_list:list_current-1<=0}">
-                {{getLegitimateData.prevBtnTxt}}
+                {{prev_btn_txt}}
             </li>
-            <template v-for="(pageNo,index) in template_arr">
+            <template v-for="(pageNo,index) in getPagingNoList">
                 <li :class="{current_active:pageNo.parameter===list_current,pagination_list:pageNo.txt!=='...'}"
                     @click="pageNo!=='...'?onPageClick(pageNo.parameter):null">
                     {{pageNo.txt}}
                 </li>
             </template>
-            <li @click="list_current<list_totalPages?onNextClick(list_current+1):null"
-                v-if="getLegitimateData.nextBtnTxt"
-                class="pagination_list"
-                :class="{no_user_list:list_current>=list_totalPages}">
-                {{getLegitimateData.nextBtnTxt}}
+            <li @click="list_current<list_totalPages?onNextClick(list_current+1):null" v-if="next_btn_txt"
+                class="pagination_list" :class="{no_user_list:list_current>=list_totalPages}">
+                {{next_btn_txt}}
             </li>
         </ul>
     </div>
 </template>
 <script>
-    import $ from 'jquery';
-    export default{
+    export default {
         name: 'pagination',
-        props: ['option', 'total', 'ajax'],
-        data(){
+        props: {
+            total: {                // 总页数 必传
+                type: [String, Number],
+                required: true,
+            },
+            current: {               //当前页   仅支持number类型和可以转化number类型的字符串类型，推荐直接传number类型 必须尾正整数
+                type: Number,
+                default: 1
+            },
+            groups: {               //中间显示多少个 仅支持number类型和可以转化number类型的字符串类型，推荐直接传number类型 （必须大于3，小于总页数，推荐 大于3小于等于6，必须尾正整数）
+                type: Number,
+                default: 3
+            },
+            first: {                //控制首页。仅支持字符串类型。如：first: '首页',如果不传则默认为'1'     可选参数
+                type: [String, Boolean],
+                default: false
+            },
+            last: {                 //控制尾页。值支持三种类型。如：last: '尾页',如果不传则默认为总页数      可选参数
+                type: [String, Boolean],
+                default: false
+            },
+            prev_btn_txt: {         //上一页按钮字段:若为false，则不显示 必须为字符串类型；可选参数。
+                type: [String, Boolean],
+                default: '<'
+            },
+            next_btn_txt: {         //下一页按钮字段:若为false，则不显示 必须为字符串类型；可选参数。
+                type: [String, Boolean],
+                default: '>'
+            },
+            hash: {                 //布尔类型，用于刷新还是在当前页面,默认为false,不记住当前页 可选参数
+                type: Boolean,
+                default: false
+            }
+        },
+        data() {
             return {
-                //默认分页配置项
-                default_option: {
-                    current: 1,             //当前页   仅支持number类型和可以转化number类型的字符串类型，推荐直接传number类型 必须尾正整数
-                    groups: 4,              //中间显示多少个 仅支持number类型和可以转化number类型的字符串类型，推荐直接传number类型 （必须大于3，小于总页数，推荐 大于3小于等于6，必须尾正整数）
-                    prevBtnTxt: '<',      //上一页按钮字段:若为false，则不显示 必须为字符串类型；可选参数。
-                    nextBtnTxt: '>',      //下一页按钮字段:若为false，则不显示 必须为字符串类型；可选参数。
-                    first: null,                //控制首页。仅支持字符串类型。如：first: '首页',如果不传则默认为'1'     可选参数
-                    last: null,                 //控制尾页。值支持三种类型。如：last: '尾页',如果不传则默认为总页数      可选参数
-                    hash: false,                //布尔类型，用于刷新还是在当前页面,默认为false,不记住当前页         可选参数
-                },
-                template_arr: [],           //渲染分页dom
-                list_current: null,         //获取当前页
+                list_current: 1,         //获取当前页
                 list_totalPages: null,      //获取总页数
             }
         },
         computed: {
-            //验证参数是否合法
-            getLegitimateData(){
-                let option = this.option;
-
-                if (!option) return this.default_option;
-
-                let new_option = {};
-                let option_keys = Object.keys(option);
-                let default_keys = Object.keys(this.default_option);
-
-                default_keys.forEach(elem => {
-                    new_option[elem] = option_keys.indexOf(elem) < 0 ? this.default_option[elem] : option[elem];
-                });
-
-                return new_option;
-            },
-
             //得到当前页
             getCurrent: {
-                get(){
+                get() {
                     return this.list_current;
                 },
-                set(current){
-                    this.getRequest(current);
+                set(current) {
+                    this.$emit('current', current);
+                    this.list_current = current;
                 }
             },
 
-            //获取储存的当前页
-            getSessionStorageCurrentPage(){
-                let current_page = sessionStorage.getItem('current_page');
-                let current = this.getLegitimateData.current;
-                if (current_page) {
-                    current = parseInt(current_page);
-                } else {
-                    current = parseInt(current);
-                }
-                return current
-            },
-        },
-        methods: {
-            //通过事件获取刷新当前页
-            refreshCurrent(new_current){
-                if (new_current === this.getCurrent)return;
-                this.getCurrent = new_current;
-                sessionStorage.setItem('current_page', new_current);
-            },
+            // 生成分页渲染需要的数据
+            getPagingNoList() {
 
-            //获取分页需要的渲染内容
-            getPagingNoList(current, totalPages){
-                current = parseInt(current);
-                totalPages = parseInt(totalPages);
+                let current = parseInt(this.getCurrent),
+                    totalPages = parseInt(this.total);
 
                 this.list_totalPages = totalPages;
                 this.list_current = current;
 
                 if (totalPages <= 1) {
-                    this.default_option.prevBtnTxt = this.default_option.nextBtnTxt = false;
-                    this.template_arr = [];
-                    return
+                    this.prev_btn_txt = this.next_btn_txt = false;
+                    return []
                 }
 
                 let [groups, first, last] = [
-                    this.getLegitimateData.groups,
-                    this.getLegitimateData.first,
-                    this.getLegitimateData.last,
+                    this.groups,
+                    this.first,
+                    this.last,
                 ];
 
-                if (first === null) first = 1;
-                if (last === null) last = totalPages;
+                if (!first) first = 1;
+                if (!last) last = totalPages;
 
                 let template_arr = [];
 
@@ -140,8 +121,7 @@
                         }
                     }
 
-                    this.template_arr = template_arr;
-                    return
+                    return template_arr;
                 }
                 if (current === totalPages) {
                     template_arr = [{
@@ -189,7 +169,6 @@
 
                 for (let j = 1; j < groups; j++) {
                     if (current - j > 0) {
-
                         if (current - j === 1) {
                             template_arr.unshift({
                                 txt: first,
@@ -214,46 +193,33 @@
                         parameter: 1
                     });
                 }
-                this.template_arr = template_arr;
+
+                return template_arr;
+            },
+        },
+        methods: {
+            //通过事件获取刷新当前页
+            refreshCurrent(new_current) {
+                if (new_current === this.getCurrent) return;
+                this.getCurrent = new_current;
             },
 
             //上一页
-            onPrevClick(prev_index){
+            onPrevClick(prev_index) {
                 this.refreshCurrent(prev_index);
             },
             //下一页
-            onNextClick(next_index){
+            onNextClick(next_index) {
                 this.refreshCurrent(next_index);
             },
             // 点击页码刷新数据
-            onPageClick (index) {
+            onPageClick(index) {
                 this.refreshCurrent(index);
-            },
-            //发起请求
-            getRequest(current){
-                if (this.ajax && this.ajax(current).done) {
-                    console.log(this.total);
-                    this.getPagingNoList(current, this.total);
-
-//                    setTimeout(() => this.getPagingNoList(current, this.total))
-                } else {
-                    throw '回调的返回值盈改为一个promise对象或者defer对象'
-                }
             }
         },
-        beforeMount(){
-            let hash = this.getLegitimateData.hash;
-            if (hash) {
-                this.getRequest(this.getSessionStorageCurrentPage);
-            } else {
-                if (sessionStorage.getItem('current_page')) {
-                    sessionStorage.removeItem('current_page');
-                }
-                this.getRequest(this.getLegitimateData.current);
-            }
 
-            this.$emit('test', 'nihao');
-
+        created() {
+            this.$emit('current', this.list_current);
         }
     }
 </script>
