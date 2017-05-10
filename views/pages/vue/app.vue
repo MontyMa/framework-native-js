@@ -5,8 +5,7 @@
         <div class="paging_box">
             <!--<pagination :option="paging_option" :total="totalPages" :ajax='runAjax'></pagination>-->
             <!--:option="paging_option" -->
-            <pagination
-                    :total="totalPages" @test='getTest' :ajax='runAjax'></pagination>
+            <pagination :total="totalPages" @test='getTest' :ajax='runAjax'></pagination>
         </div>
 
         <!--计算器属性研究-->
@@ -20,7 +19,7 @@
     import pagination from './modules/pagination.vue';  //分页
 
     export default {
-        data(){
+        data() {
             return {
                 //分页配置项
                 paging: {},
@@ -30,17 +29,19 @@
 
         components: {pagination, computedAttributes},
         methods: {
-            func(val){
+            func(val) {
                 console.log(val, 1231231);
                 $.get('/static/json/pagination.json').done(res => {
                     this.paging = res
                 })
-
             },
-            getTest(val){
+            getTest(val) {
                 this.func(val)
             },
-            runAjax(current){
+            test(){
+
+            },
+            runAjax(current) {
                 let param = {
                     pageSize: 10,
                     pageNo: current
@@ -51,22 +52,25 @@
 
                 request.done(res => {
                     console.log(res);
-//                    this.paging_option.totalPages = res.totalPages;
+                    //                    this.paging_option.totalPages = res.totalPages;
                     this.total_pages = res.totalPages;
                 });
 
                 return request;
             }
         },
-        created(){
+        created() {
             this.runAjax(1)
         },
-        beforeMount(){
-        }
+        mounted() {
+        },
+        beforeMount() {
+        },
     }
+
 </script>
 
-<style lang="less" scoped>
+<style scoped lang="less">
     #app_wrap {
         .title {
             text-align: center;
