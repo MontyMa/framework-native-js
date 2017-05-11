@@ -8,7 +8,7 @@ import $ from 'jquery';
 
 
 import Children from './modules/children.jsx';
-// import Barrage from './components/barrage.jsx';
+import Barrage from './components/barrage.jsx';
 
 
 let getAge = () => {
@@ -64,6 +64,7 @@ class App extends Component {
             <div ref='divs' className="div_class" onClick={this.parentClick.bind(this)}>
                 Hello,{this.name} {this.state.isName ? 'Monty' : 'haha'},你今年{this.age}岁了
                 <Children content_txt={this.state.content_txt}/>
+                <Barrage/>
             </div>
         )
     }
