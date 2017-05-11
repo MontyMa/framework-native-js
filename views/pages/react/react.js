@@ -8,6 +8,7 @@ import $ from 'jquery';
 
 
 import Children from './modules/children.jsx';
+// import Barrage from './components/barrage.jsx';
 
 
 let getAge = () => {
