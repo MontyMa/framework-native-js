@@ -7,15 +7,16 @@ class Barrage extends Component {
         super(props);
         this.state = {
             list_data: []
-        }
+        };
+        this.arr = [];
     }
 
     click() {
-        this.state.list_data.push('hshsh');
 
+        this.arr.push('hshsh');
 
         this.setState({
-            list_data: this.state.list_data
+            list_data: this.arr
         })
     }
 
@@ -32,7 +33,10 @@ class Barrage extends Component {
         console.log(ul_list.offsetHeight);
 
         let dddd = document.getElementById("ddd");
+
         dddd.scrollTop = dddd.scrollHeight;
+
+
 
         // if (ul_list.offsetHeight < 300)return;
         // console.dir(ul_list);
