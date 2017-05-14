@@ -11,7 +11,6 @@ class DargLine extends Component {
             percent: 100,
         };
 
-        this.old_x = 0;             //点击时候的鼠标x轴位置
     }
 
     componentDidMount() {
@@ -22,15 +21,11 @@ class DargLine extends Component {
         $(document).on('mousemove.drag', (e_move) => {
             if (!this.drag_lock) return;
 
-            let $back_line = $(this.j_back_line);
-            let $left = $back_line.offset().left;
-            let $width = $back_line.width();
-            let cur_x = e_move.clientX - $left;
-
-            // console.log(cur_x);
-
-            // let percent = ((cur_x / $width) * 100).toFixed(2);
-            let percent = Math.floor((cur_x / $width) * 100);
+            let $back_line = $(this.j_back_line),
+                $left = $back_line.offset().left,
+                $width = $back_line.width(),
+                cur_x = e_move.clientX - $left,
+                percent = Math.floor((cur_x / $width) * 100);
 
             if (percent > 100) {
                 percent = 100
@@ -45,23 +40,11 @@ class DargLine extends Component {
     }
 
     componentDidUpdate() {
-        console.log(this.state.percent, 999);
+        // console.log(this.state.percent, 999);
     }
 
     mouseDown(e_down) {
         this.drag_lock = true;
-        this.old_x = e_down.clientX;
-
-    }
-
-    mouseMove(e_move, old_x) {
-        let cur_x = e_move.clientX - old_x;
-
-        let left = this.state.percent + cur_x;
-
-        this.setState({
-            percent: left
-        })
     }
 
     render() {
