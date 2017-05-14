@@ -10,14 +10,14 @@ class Children extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        console.log(nextProps);
+        // console.log(nextProps);
     }
 
     componentWillMount() {
     }
 
     componentWillUpdate() {
-        console.log(this.props);
+        // console.log(this.props);
     }
 
 

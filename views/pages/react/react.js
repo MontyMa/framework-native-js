@@ -9,6 +9,7 @@ import $ from 'jquery';
 
 import Children from './modules/children.jsx';
 import Barrage from './components/barrage.jsx';
+import DargLine from './components/darg_line/darg_line.jsx';
 
 
 let getAge = () => {
@@ -22,7 +23,7 @@ let getName = () => {
 class App extends Component {
     constructor(props, context) {
         super();
-        console.log(props);
+        // console.log(props);
         this.name = getName();
         this.age = getAge();
 
@@ -40,7 +41,7 @@ class App extends Component {
     }
 
     componentWillUpdate() {
-        console.log('我也被执行了');
+        // console.log('我也被执行了');
     }
 
     shouldComponentUpdate() {
@@ -49,14 +50,14 @@ class App extends Component {
 
 
     componentWillMount() {
-        console.log('我被执行了');
+        // console.log('我被执行了');
 
         this.name = '贾兰影';
     }
 
     componentWillReceiveProps(nextProps) {
 
-        console.log(nextProps);
+        // console.log(nextProps);
     }
 
     render() {
@@ -65,6 +66,7 @@ class App extends Component {
                 Hello,{this.name} {this.state.isName ? 'Monty' : 'haha'},你今年{this.age}岁了
                 <Children content_txt={this.state.content_txt}/>
                 <Barrage/>
+                <DargLine/>
             </div>
         )
     }

@@ -28,9 +28,9 @@ class Barrage extends Component {
     }
 
     componentDidUpdate(pp) {
-        console.log(pp, 1212);
+        // console.log(pp, 1212);
         let ul_list = document.querySelector('.ul_list');
-        console.log(ul_list.offsetHeight);
+        // console.log(ul_list.offsetHeight);
 
         let dddd = document.getElementById("ddd");
 
