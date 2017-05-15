@@ -3,9 +3,8 @@
  */
 
 import React, {Component} from 'react';
-import ReactDom, {render} from 'react-dom';
+import ReactDom from 'react-dom';
 import $ from 'jquery';
-
 
 import Children from './modules/children.jsx';
 import Barrage from './components/barrage.jsx';
@@ -51,7 +50,6 @@ class App extends Component {
 
     componentWillMount() {
         // console.log('我被执行了');
-
         this.name = '贾兰影';
     }
 
@@ -72,14 +70,9 @@ class App extends Component {
     }
 
     componentDidMount() {
-        const DIVS = ReactDom.findDOMNode(this.refs.divs);
 
-
-        this.setState({
-            isName: !this.state.isName
-        })
     }
 }
 
-render(<App app_data="haha"/>, document.querySelector('#j_app'));
+ReactDom.render(<App app_data="haha"/>, document.querySelector('#j_app'));
 
