@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import './barrage.less';
+import FloatTxt from './float_txt/float_txt.jsx';
 
 import $ from 'jquery';
 class Barrage extends Component {
@@ -13,48 +14,19 @@ class Barrage extends Component {
 
     click() {
 
-        this.arr.push('hshsh');
-
-        this.setState({
-            list_data: this.arr
-        })
     }
 
     getList() {
-        return this.state.list_data.map((elem, i) => {
-            return <li key={i}>{elem},{i}</li>
-        })
 
     }
 
     componentDidUpdate(pp) {
-        // console.log(pp, 1212);
-        let ul_list = document.querySelector('.ul_list');
-        // console.log(ul_list.offsetHeight);
 
-        let dddd = document.getElementById("ddd");
-
-        dddd.scrollTop = dddd.scrollHeight;
-
-
-
-        // if (ul_list.offsetHeight < 300)return;
-        // console.dir(ul_list);
-        //document.getElementByIdx_x('textarea').scrollTop = document.getElementByIdx_x('textarea').scrollHeight
-        // console.log(ul_list.scrollTop, ul_list.scrollHeight);
-        // $(ul_list).scrollTop($(ul_list).scrollHeight());
-        // ul_list.marginTop = ul_list.offsetHeight - 300;
     }
 
     render() {
-        return (
-            <div>
-                <div className="list_box">
-                    <ul className="ul_list" id="ddd">{this.getList()}</ul>
-                </div>
-                <input type="button" value='点我' onClick={this.click.bind(this)}/>
-            </div>
-        )
+        return <FloatTxt/>
+
     }
 
 }
