@@ -15,7 +15,6 @@ let getEntry = (glob_path) => {
     let files = glob.sync(glob_path);
     let entries = {};
 
-
     files.forEach(elem => {
         entries[elem.split('/')[3]] = elem
     });
@@ -23,6 +22,8 @@ let getEntry = (glob_path) => {
     return entries;
 };
 let entries = getEntry('./views/pages/**/**.js');
+entries['']
+console.log(entries);
 
 let chunks = Object.keys(entries);
 
@@ -38,11 +39,10 @@ let webpack_option = {
         chunkFilename: 'scripts/[id].chunk.js?[chunkhash]'
     },
     module: {
-        loaders: [
-            {
+        loaders: [{
                 test: /\.css$/,
                 //配置css的抽取器、加载器。'-loader'可以省去
-                loader: ExtractTextPlugin.extract({fallback: 'style-loader', use: 'css-loader'}),
+                loader: ExtractTextPlugin.extract({ fallback: 'style-loader', use: 'css-loader' }),
             },
             {
                 test: /\.(js|jsx)$/,
@@ -107,7 +107,7 @@ let generateHtml = (html_path) => {
             template: elem, //html模板路径
             inject: 'body', //js插入的位置，true/'head'/'body'/false
             hash: true, //为静态资源生成hash值
-            chunks: ['vendors', pathname],//需要引入的chunk，不配置就会引入所有页面的资源
+            chunks: ['vendors', pathname], //需要引入的chunk，不配置就会引入所有页面的资源
             minify: { //压缩HTML文件
                 removeComments: true, //移除HTML中的注释
                 // collapseWhitespace: true //删除空白符与换行符
@@ -121,7 +121,3 @@ generateHtml('./views/pages/**/**.html');
 
 
 module.exports = webpack_option;
-
-
-
-
