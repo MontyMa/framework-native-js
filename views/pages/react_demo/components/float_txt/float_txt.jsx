@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import './float_txt.less'
 
 
@@ -83,69 +82,6 @@ class FloatTxt extends React.Component {
                             background: 'rgba(255, 0, 0, 0.1)',
                             overflow: 'hidden',
                         }}>
-                        <ReactCSSTransitionGroup
-                            transitionName={{
-                                enter: 'bullet-enter',
-                            }}
-                            transitionEnterTimeout={10000}
-                            transitionLeave={false}>
-                            {item}
-                            {/*<div className="bullet">hahaha</div>*/}
-                            {/*<div className="bullet">hahaha</div>*/}
-                            {/*<div className="bullet">hahaha</div>*/}
-                            {/*<div className="bullet">hahaha</div>*/}
-                            {/*<div className="bullet">hahaha</div>*/}
-                            {/*<div className="bullet">hahaha</div>*/}
-                            {/*<div className="bullet">hahaha</div>*/}
-                            {/*<div className="bullet">hahaha</div>*/}
-                            {/*<div className="bullet">hahaha</div>*/}
-                            {/*<div className="bullet">hahaha</div>*/}
-                            {/*<div className="bullet">hahaha</div>*/}
-                            {/*<div className="bullet">hahaha</div>*/}
-                            {/*<div className="bullet">hahaha</div>*/}
-                            {/*<div className="bullet">hahaha</div>*/}
-                            {/*<div className="bullet">hahaha</div>*/}
-                            {/*<div className="bullet">hahaha</div>*/}
-                            {/*<div className="bullet">hahaha</div>*/}
-                            {/*<div className="bullet">hahaha</div>*/}
-                            {/*<div className="bullet">hahaha</div>*/}
-                            {/*<div className="bullet">hahaha</div>*/}
-                            {/*<div className="bullet">hahaha</div>*/}
-                            {/*<div className="bullet">hahaha</div>*/}
-                            {/*<div className="bullet">hahaha</div>*/}
-                            {/*<div className="bullet">hahaha</div>*/}
-                            {/*<div className="bullet">hahaha</div>*/}
-                            {/*<div className="bullet">hahaha</div>*/}
-                            {/*<div className="bullet">hahaha</div>*/}
-                            {/*<div className="bullet">hahaha</div>*/}
-                            {/*<div className="bullet">hahaha</div>*/}
-                            {/*<div className="bullet">hahaha</div>*/}
-                            {/*<div className="bullet">hahaha</div>*/}
-                            {/*<div className="bullet">hahaha</div>*/}
-                            {/*<div className="bullet">hahaha</div>*/}
-                            {/*<div className="bullet">hahaha</div>*/}
-                            {/*<div className="bullet">hahaha</div>*/}
-                            {/*<div className="bullet">hahaha</div>*/}
-                            {/*<div className="bullet">hahaha</div>*/}
-                            {/*<div className="bullet">hahaha</div>*/}
-                            {/*<div className="bullet">hahaha</div>*/}
-                            {/*<div className="bullet">hahaha</div>*/}
-                            {/*<div className="bullet">hahaha</div>*/}
-                            {/*<div className="bullet">hahaha</div>*/}
-                            {/*<div className="bullet">hahaha</div>*/}
-                            {/*<div className="bullet">hahaha</div>*/}
-                            {/*<div className="bullet">hahaha</div>*/}
-                            {/*<div className="bullet">hahaha</div>*/}
-                            {/*<div className="bullet">hahaha</div>*/}
-                            {/*<div className="bullet">hahaha</div>*/}
-                            {/*<div className="bullet">hahaha</div>*/}
-                            {/*<div className="bullet">hahaha</div>*/}
-                            {/*<div className="bullet">hahaha</div>*/}
-                            {/*<div className="bullet">hahaha</div>*/}
-                            {/*<div className="bullet">hahaha</div>*/}
-                            {/*<div className="bullet">hahaha</div>*/}
-                            {/*<div className="bullet">hahaha</div>*/}
-                        </ReactCSSTransitionGroup>
                     </div>
                 </form>
             </div>

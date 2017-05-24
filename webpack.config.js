@@ -22,7 +22,6 @@ let getEntry = (glob_path) => {
     return entries;
 };
 let entries = getEntry('./views/pages/**/**.js');
-entries['']
 console.log(entries);
 
 let chunks = Object.keys(entries);
