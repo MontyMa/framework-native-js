@@ -4,9 +4,6 @@ class Children extends Component {
 
     constructor(props) {
         super(props);
-
-        // this.content_txt = props.content_txt;
-
     }
 
     componentWillReceiveProps(nextProps) {

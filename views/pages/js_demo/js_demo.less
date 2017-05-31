@@ -6,8 +6,23 @@
   .barrage {
     position: absolute;
     background-color: #fb5353;
+    -webkit-animation: 10s linear forwards barrage;
+    -o-animation: 10s linear forwards barrage;
+    animation: 10s linear forwards barrage;
+  }
+}
+
+@keyframes barrage {
+  0% {
     left: 100%;
-    //transform: translateX(-100%);
-    transition: all 10s linear;
+    transform: translateX(0);
+  }
+  100% {
+    left: 0;
+    -webkit-transform: translateX(-100%);
+    -moz-transform: translateX(-100%);
+    -ms-transform: translateX(-100%);
+    -o-transform: translateX(-100%);
+    transform: translateX(-100%);
   }
 }

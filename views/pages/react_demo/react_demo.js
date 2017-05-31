@@ -6,7 +6,7 @@ import React, {Component} from 'react';
 import ReactDom from 'react-dom';
 import $ from 'jquery';
 
-import Children from './modules/children.jsx';
+import Children from './components/children.jsx';
 import Barrage from './components/barrage.jsx';
 import DargLine from './components/darg_line/darg_line.jsx';
 
