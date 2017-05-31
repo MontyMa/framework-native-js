@@ -7,7 +7,7 @@ let router_config = [
     ['/', '/home'],
     ['/js-demo', '/js_demo'],
     ['/paging', '/paging'],
-    ['/react_demo', '/react_demo'],
+    ['/react-demo', '/react_demo'],
     ['/vue', '/vue'],
 ];
 
