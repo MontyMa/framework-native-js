@@ -36,8 +36,8 @@ class Alert extends Component {
                     {
                         this.props.callback ?
                             <div className="btn_box">
-                                <div className="cancel" onClick={() => this.props.callback(0)}>取消</div>
-                                <div className="ok" onClick={() => this.props.callback(1)}>确定</div>
+                                <div className="cancel btn" onClick={() => this.props.callback(0)}>取消</div>
+                                <div className="ok btn" onClick={() => this.props.callback(1)}>确定</div>
                             </div> : null
                     }
                     <div className="close"
