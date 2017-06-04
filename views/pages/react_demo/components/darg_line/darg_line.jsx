@@ -4,7 +4,6 @@ import './darg_line.less';
 class DargLine extends Component {
     constructor(props) {
         super(props);
-        // this.percent = 100;
         this.drag_lock = false;     ////拖动锁
 
         this.state = {
