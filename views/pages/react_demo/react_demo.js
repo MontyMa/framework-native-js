@@ -6,9 +6,10 @@ import React, {Component} from 'react';
 import ReactDom from 'react-dom';
 import $ from 'jquery';
 
-import Children from './modules/children.jsx';
+import Children from './components/children.jsx';
 import Barrage from './components/barrage.jsx';
 import DargLine from './components/darg_line/darg_line.jsx';
+import Alert from './components/alert/alert.jsx'
 
 
 let getAge = () => {
@@ -39,6 +40,15 @@ class App extends Component {
         })
     }
 
+
+    closeAlert(type) {
+        console.log(type);
+    }
+
+    alertCallback(type) {
+        console.log(type, 'call');
+    }
+
     componentWillUpdate() {
         // console.log('我也被执行了');
     }
@@ -54,7 +64,6 @@ class App extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-
         // console.log(nextProps);
     }
 
@@ -65,6 +74,9 @@ class App extends Component {
                 <Children content_txt={this.state.content_txt}/>
                 <Barrage/>
                 <DargLine/>
+                <Alert title="下单提醒" content="您正在进行挂单操作，请确认！"
+                       callback={this.alertCallback.bind(this)}
+                       closeCallback={this.closeAlert.bind(this)}/>
             </div>
         )
     }

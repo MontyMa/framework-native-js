@@ -4,7 +4,6 @@ import $ from 'jquery';
 
 function* hello() {
     // yield $.get('/static/json/pagination.json');
-
     yield 'world';
     return 'ending';
 }
