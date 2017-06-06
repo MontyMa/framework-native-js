@@ -1,7 +1,6 @@
 import React from 'react';
 import './float_txt.less'
 
-
 class FloatTxt extends React.Component {
     constructor(props) {
         super(props);

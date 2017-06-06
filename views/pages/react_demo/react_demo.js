@@ -5,84 +5,64 @@
 import React, {Component} from 'react';
 import ReactDom from 'react-dom';
 import $ from 'jquery';
-
 import Children from './components/children.jsx';
 import Barrage from './components/barrage.jsx';
 import DargLine from './components/darg_line/darg_line.jsx';
 import Alert from './components/alert/alert.jsx'
 
-
-let getAge = () => {
-    return 26;
-};
-
-let getName = () => {
-    return 'Monty'
-};
-
+import './react_demo.less'
 class App extends Component {
     constructor(props, context) {
         super();
-        // console.log(props);
-        this.name = getName();
-        this.age = getAge();
 
-        this.state = {
-            isName: true,
-            content_txt: '初始化加载'
-        };
-
-    }
-
-    parentClick() {
-        this.setState({
-            content_txt: '我改变了'
-        })
-    }
-
-
-    closeAlert(type) {
-        console.log(type);
-    }
-
-    alertCallback(type) {
-        console.log(type, 'call');
     }
 
     componentWillUpdate() {
-        // console.log('我也被执行了');
     }
-
-    shouldComponentUpdate() {
-        return true
-    }
-
 
     componentWillMount() {
-        // console.log('我被执行了');
-        this.name = '贾兰影';
     }
 
     componentWillReceiveProps(nextProps) {
-        // console.log(nextProps);
     }
 
     render() {
         return (
-            <div ref='divs' className="div_class" onClick={this.parentClick.bind(this)}>
-                Hello,{this.name} {this.state.isName ? 'Monty' : 'haha'},你今年{this.age}岁了
-                <Children content_txt={this.state.content_txt}/>
-                <Barrage/>
-                <DargLine/>
-                <Alert title="下单提醒" content="您正在进行挂单操作，请确认！"
-                       callback={this.alertCallback.bind(this)}
-                       closeCallback={this.closeAlert.bind(this)}/>
+            <div className="main">
+                <div className="title" ref={j_title => this.j_title = j_title}/>
+                <div className="content" ref={j_content => this.j_content = j_content}>
+                    <div className="right" ref={j_right => this.j_right = j_right}>
+                        <div className="group_one" ref={j_group_one => this.j_group_one = j_group_one}>
+                            <div className="group_three" ref={j_group_three => this.j_group_three = j_group_three}>
+                                sdfsfsfsdf
+                            </div>
+                            <div className="group_four">
+                                sdfsfsf
+                            </div>
+                        </div>
+                        <div className="group_two" ref={j_group_two => this.j_group_two = j_group_two}/>
+                    </div>
+                    <div className="left" ref={j_left => this.j_left = j_left}>
+                        <div className="group_five" ref={j_group_five => this.j_group_five = j_group_five}/>
+                        <div className="group_six" ref={j_group_six => this.j_group_six = j_group_six}/>
+                    </div>
+                </div>
             </div>
         )
     }
 
-    componentDidMount() {
+    getSize() {
+        $(this.j_content).height($(window).height() - $(this.j_title).height());
+        $(this.j_group_one).height($(this.j_right).height() - $(this.j_group_two).height());
+        $(this.j_left).width($(window).width() - $(this.j_right).width());
+        $(this.j_group_five).height($(this.j_left).height() - $(this.j_group_six).height());
+    }
 
+    componentDidMount() {
+        this.getSize();
+        $(window).on('resize', () => {
+            this.getSize()
+        })
     }
 }
 

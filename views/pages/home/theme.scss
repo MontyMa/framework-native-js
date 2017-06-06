@@ -1,0 +1,38 @@
+//Created by monty.ma on 17/6/6.
+// Color themes
+$themes: (
+        default: (
+                col_1:#fb5353,
+                col_2:#f1c40f,
+                col_3:#1382C1
+        ),
+        banana: (
+                col_1:#567E95,
+                col_2:#f1fdaf,
+                col_3:#428BCb
+        )
+);
+
+@mixin theme($name, $color) {
+  .#{$name} {
+    .component {
+      border-color: map-get($color, col_1)
+    }
+
+    .component__heading {
+      color: map-get($color, col_2);
+    }
+
+    .component__list-item {
+      background: map-get($color, col_3);
+    }
+
+    [data-theme='#{$name}'] {
+      background: map-get($color, col_1);
+    }
+  }
+}
+
+@each $key, $value in $themes {
+  @include theme($key, $value);
+}

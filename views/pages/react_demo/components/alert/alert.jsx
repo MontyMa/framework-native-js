@@ -3,6 +3,12 @@
  */
 import React, {Component} from 'react';
 import './alert.less';
+//用法：
+// {/*<Alert title="下单提醒" content="您正在进行挂单操作，请确认！"*/}
+// {/*callback={this.alertCallback.bind(this)}*/}
+// {/*closeCallback={this.closeAlert.bind(this)}/>*/}
+
+
 class Alert extends Component {
     constructor(props) {
         super(props);

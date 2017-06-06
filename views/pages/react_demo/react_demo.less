@@ -1,0 +1,90 @@
+//Created by monty.ma on 17/6/6.
+html {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+#j_app {
+  height: 100%;
+}
+
+.main {
+  height: 100%;
+  width: 100%;
+
+  overflow: hidden;
+  .title {
+    height: 50px;
+    min-width: 100%;
+    background-color: #fb5353;
+  }
+  .content {
+    background-color: #9CABB8;
+    width: 100%;
+    min-width: 1300px;
+    min-height: 760px;
+    position: relative;
+    &:after {
+      content: '';
+      display: block;
+      clear: both;
+    }
+    .right {
+      float: right;
+      width: 560px;
+      height: 100%;
+      position: relative;
+      right: 0;
+      top: 0;
+      .group_two {
+        width: 100%;
+        min-height: 200px;
+        position: absolute;
+        bottom: 0;
+        background-color: #0093F1;
+      }
+      .group_one {
+        width: 100%;
+        min-height: 200px;
+        position: relative;
+        background-color: #494949;
+        display: flex;
+        justify-content: space-between;
+        div {
+          width: 50%;
+          &:first-child {
+            background-color: blueviolet;
+          }
+          &:last-child {
+            background-color: brown;
+          }
+        }
+      }
+    }
+    .left {
+      min-width: 740px;
+      height: 100%;
+      //margin-right: 560px;
+      position: relative;
+      .group_five {
+        background-color: aqua;
+        width: 100%;
+        //min-width: 740px;
+      }
+      .group_six {
+        //min-width: 740px;
+        //display: none;
+        height: 200px;
+        background-color: black;
+        width: 100%;
+        position: absolute;
+        bottom: 0;
+      }
+    }
+  }
+}

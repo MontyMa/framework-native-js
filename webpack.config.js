@@ -1,7 +1,6 @@
 /**
  * Created by monty on 2017/4/18.
  */
-
 const webpack = require('webpack');
 const glob = require('glob');
 const path = require('path');
@@ -11,7 +10,6 @@ const CommonsChunkPlugin = webpack.optimize.CommonsChunkPlugin;
 
 //获取入口
 let getEntry = (glob_path) => {
-
     let files = glob.sync(glob_path);
     let entries = {};
 
@@ -38,10 +36,11 @@ let webpack_option = {
         chunkFilename: 'scripts/[id].chunk.js?[chunkhash]'
     },
     module: {
-        loaders: [{
+        loaders: [
+            {
                 test: /\.css$/,
                 //配置css的抽取器、加载器。'-loader'可以省去
-                loader: ExtractTextPlugin.extract({ fallback: 'style-loader', use: 'css-loader' }),
+                loader: ExtractTextPlugin.extract({fallback: 'style-loader', use: 'css-loader'}),
             },
             {
                 test: /\.(js|jsx)$/,
@@ -60,6 +59,13 @@ let webpack_option = {
                 //根据从右到左的顺序依次调用less、css加载器，前一个的输出是后一个的输入
                 //你也可以开发自己的loader哟。有关loader的写法可自行谷歌之。
                 loader: ExtractTextPlugin.extract('css-loader!less-loader')
+            },
+            {
+                test: /\.scss$/,
+                //配置less的抽取器、加载器。中间!有必要解释一下，
+                //根据从右到左的顺序依次调用less、css加载器，前一个的输出是后一个的输入
+                //你也可以开发自己的loader哟。有关loader的写法可自行谷歌之。
+                loader: ExtractTextPlugin.extract('css-loader!sass-loader')
             },
             {
                 //html模板加载器，可以处理引用的静态资源，默认配置参数attrs=img:src，处理图片的src引用的资源
