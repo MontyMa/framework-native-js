@@ -11,11 +11,8 @@ let hlo = hello();
 console.log(hlo.next('a'));
 console.log(hlo.next());
 
-
-
-var arr = [1, [
-        [2, 3], 4
-    ],
+var arr = [1,
+    [[2, 3], 4],
     [5, 6]
 ];
 
