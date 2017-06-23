@@ -1,14 +1,12 @@
 <template>
     <div id="app_wrap">
-        <div class="title">我是基于Vue的分页插件</div>
+        <!--<div class="title">我是基于Vue的分页插件</div>-->
         <!--分页插件-->
-        <div class="paging_box">
-            <pagination @current='getResponse' :total="total_pages" :current='2'></pagination>
-        </div>
-        <div>{{getTest}}</div>
-
+        <!--<div class="paging_box">-->
+            <!--<pagination @current='getResponse' :total="total_pages" :current='2'></pagination>-->
+        <!--</div>-->
+        <!--<div>{{getTest}}</div>-->
         <input type="button" value="click" @click="onClick">
-
         <div>{{getTxt}}</div>
         <input type="button" value="点我改变为'按钮1'" @click="onClick1('按钮1')">
         <input type="button" value="点我改变为'按钮2'" @click="onClick1('按钮2')">
