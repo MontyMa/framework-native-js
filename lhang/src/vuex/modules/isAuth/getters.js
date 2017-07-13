@@ -1,0 +1,1 @@
+export const getauthData = state => state.getauthData

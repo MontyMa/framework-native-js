@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 19.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="图层_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 1024 1024" style="enable-background:new 0 0 1024 1024;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:#67C5F4;}
+	.st1{fill:#454551;}
+	.st2{fill:#38393E;}
+	.st3{fill:#DBDBDB;}
+	.st4{fill:#F8F8F8;}
+	.st5{fill:#FFFFFF;}
+	.st6{fill:#A2A0A0;}
+</style>
+<g>
+	<circle id="XMLID_80_" class="st0" cx="512" cy="512" r="512"/>
+	<g>
+		<path id="XMLID_91_" class="st1" d="M430.4,1017.5c26.5,4.2,53.8,6.4,81.6,6.4c36.8,0,72.8-3.9,107.4-11.3V734.8h-189V1017.5z"/>
+		<rect id="XMLID_85_" x="430.4" y="734.8" class="st2" width="189" height="105.5"/>
+	</g>
+	<g>
+		<path id="XMLID_86_" class="st3" d="M764.2,296.2H325.5c-79.6,0-144.1,64.5-144.1,144.1v313.2h726.9V440.3
+			C908.4,360.7,843.8,296.2,764.2,296.2z"/>
+		<path id="XMLID_88_" class="st1" d="M330,296.2L330,296.2c-94.9,0-171.9,77-171.9,171.9v285.4h343.8V468.1
+			C501.9,373.1,425,296.2,330,296.2z"/>
+		<rect id="XMLID_81_" x="55.9" y="414" class="st4" width="420.7" height="271.3"/>
+		<polygon id="XMLID_89_" class="st5" points="266.3,604.1 476.7,414 55.9,414 		"/>
+		<path id="XMLID_92_" class="st6" d="M860,173.2H747.6c-18.4,0-33.3,14.9-33.3,33.3V517c0,18.4,14.9,33.3,33.3,33.3
+			c18.4,0,33.3-14.9,33.3-33.3V258.2h79.2c23.4,0,42.4-19,42.4-42.4S883.5,173.2,860,173.2z"/>
+	</g>
+</g>
+</svg>

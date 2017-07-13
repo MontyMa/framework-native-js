@@ -1,0 +1,163 @@
+html {
+  min-width: 1200px;
+  height: 100%;
+  width: 100%;
+  color: #494949;
+}
+
+body {
+  height: 100%;
+  width: 100%;
+  -webkit-transition: 200ms;
+  -moz-transition: 200ms;
+  -ms-transition: 200ms;
+  -o-transition: 200ms;
+  transition: 200ms;
+}
+
+html, body, ul, li, ol, dl, dd, dt, p, h1, h2, h3, h4, h5, h6, form, input, button, fieldset, span legend, img {
+  margin: 0;
+  padding: 0;
+  font-family: Microsoft YaHei, Arial, 'iconfont' ,'iconfontyyy', Verdana, sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  width: 100%;
+}
+
+fieldset, img {
+  border: none;
+}
+
+ul, ol {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+*, :after, :before {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+input, button {
+  border: none;
+  border-radius: 2px;
+  outline: none;
+}
+
+input:-webkit-autofill {
+  //background-color: #ffffff;
+}
+
+//正常输入表单样式
+input[type="password"]:focus, input[type="text"]:focus {
+  border: 1px solid #0093F1 !important;
+  box-shadow: inset 0 0 4px rgba(0, 147, 241, 0.82);
+}
+
+//错误时表单样式
+input[type="password"]:focus, input[type="text"]:focus, input[type="password"], input[type="text"] {
+  &.g_input_error {
+    border: 1px solid #FF4FA1 !important;
+    box-shadow: inset 0 0 4px rgba(255, 79, 161, 0.82);
+    background-color: #FFEEF6;
+  }
+}
+
+//iconfont store
+@import "./iconfont";
+
+//清除浮动
+.g_c_f:after {
+  content: '';
+  display: block;
+  width: 0;
+  height: 0;
+  clear: both;
+}
+
+//checkbox style
+.g_i_check {
+  display: none;
+}
+
+.g_lable {
+  display: inline-block;
+  vertical-align: middle;
+  user-select: none;
+  cursor: pointer;
+}
+
+.g_i_check + * {
+  width: 14px;
+  height: 14px;
+  box-sizing: border-box;
+  background: #ffffff;
+  border: 1px solid #dedede;
+  user-select: none;
+  cursor: pointer;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  border-radius: 2px;
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 10px;
+}
+
+.g_i_check:checked + * {
+  background: url('../img/check.svg') no-repeat center;
+  background-size: 110% 110%;
+  border: none;
+}
+
+.g_t_btn { //渐变按钮默认状态
+  color: #666;
+  background-color: #BDCFDA; /* fallback color if gradients are not supported */
+  background-image: -webkit-linear-gradient(top, #F0F8FD, #BDCFDA); /* For Chrome 25 and Safari 6, iOS 6.1, Android 4.3 */
+  background-image: -moz-linear-gradient(top, #F0F8FD, #BDCFDA); /* For Firefox (3.6 to 15) */
+  background-image: -o-linear-gradient(top, #F0F8FD, #BDCFDA); /* For old Opera (11.1 to 12.0) */
+  filter: progid:DXImageTransform.Microsoft.Gradient(startColorStr='#F0F8FD', endColorStr='#BDCFDA', gradientType=0);
+  background-image: linear-gradient(to bottom, #F0F8FD, #BDCFDA); /* Standard syntax; must be last */
+  &.active {
+    color: #494949;
+    background-color: #FEFCFA; /* fallback color if gradients are not supported */
+    background-image: -webkit-linear-gradient(top, #CED1B8, #FEFCFA); /* For Chrome 25 and Safari 6, iOS 6.1, Android 4.3 */
+    background-image: -moz-linear-gradient(top, #CED1B8, #FEFCFA); /* For Firefox (3.6 to 15) */
+    background-image: -o-linear-gradient(top, #CED1B8, #FEFCFA); /* For old Opera (11.1 to 12.0) */
+    filter: progid:DXImageTransform.Microsoft.Gradient(startColorStr='#CED1B8', endColorStr='#FEFCFA', gradientType=0);
+    background-image: linear-gradient(to bottom, #CED1B8, #FEFCFA); /* Standard syntax; must be last */
+  }
+}
+
+.g_center {
+  width: 1200px;
+  margin: 0 auto;
+}
+
+.g_price_red {
+  color: #FF554B;
+}
+
+.g_price_green {
+  color: #00CA8D;
+}
+
+//Safari输入框提示文字显示一半
+input[type="text"] {
+  line-height: 35px;
+}
+
+.hsy-datepicker .calendar {
+  z-index: 20 !important;
+}
+
+@import "laydate"; //时间选择器

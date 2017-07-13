@@ -1,0 +1,128 @@
+@charset "UTF-8";
+// 字体级别
+$font-0: 19px;
+$font-1: 18px;
+$font-2: 17px;
+$font-3: 16px;
+$font-4: 15px;
+$font-5: 14px;
+$font-6: 13px;
+$font-7: 12px;
+$font-8: 11px;
+$font-9: 10px;
+// 颜色设置
+// 主色调
+$color-0: #50c8ad;
+// 浅主色
+$color-1: #d3f1eb;
+// 浅主色2
+$color-2: #a7e3d7;
+// 浅主色3
+$color-3: #84d8c5;
+// 背景浅蓝
+$color-4: #5a6770;
+// 背景灰色
+$color-5: #f2f2f2;
+// 背景灰色
+$color-6: #f9f9f9;
+// 配色深蓝
+$color-7: #2d2e3b;
+// 配色深蓝降低90%透明度
+$color-8: #535877;
+// 字体白色
+$color-9: #fff;
+//  字体黑色
+$color-10: #000;
+// 字体灰色
+$color-11: #666;
+// 主要用于辅助字体色
+$color-12: #999;
+// 预约过期
+$color-13: #d0d0d0;
+// 线条灰色
+$color-14: #e1e1e1;
+// 点缀红色
+$color-15: #e32b1d;
+// 点缀色蓝色
+$color-16: #5b8aca;
+// 点缀色黄色
+$color-17: #ffc666;
+// 点缀色橙色
+$color-18: #ffb321;
+// 蓝灰色
+$color-19: #1e70e1;
+
+// 大小
+$number-35: 35px;
+$number-40: 40px;
+$number-45: 45px;
+$number-50: 50px;
+$number-60: 60px;
+$number-70: 70px;
+$number-90: 90px;
+
+$primary: #0093F1;
+
+$success: #6da825;
+
+$warning: #f35809;
+
+$danger: #ea3942;
+
+$dark: #454551;
+
+$btn-default-bg: #D8D8D8;
+$btn-primary-bg-hover: $primary;
+$btn-default-color: #fff;
+
+$btn-primary-bg: $primary;
+$btn-primary-bg-hover: #2f81bc;
+$btn-primary-color: #fff;
+
+$btn-success-bg: $success;
+$btn-success-bg-hover: #619621;
+$btn-success-color: #fff;
+
+$btn-warning-bg: $warning;
+$btn-warning-bg-hover: #E55308;
+$btn-warning-color: #fff;
+
+$btn-danger-bg: $danger;
+$btn-danger-bg-hover: #d33139;
+$btn-danger-color: #fff;
+
+$btn-link-bg: transparent;
+$btn-link-border: transparent;
+$btn-link-color: #2972cc;
+
+$tab-bg: #f8f8f8;
+$tab-color: #333;
+$tab-height: 30px;
+$tab-active: $primary;
+$tab-large-height: 40px;
+
+$pagination-font-size: 14px;
+$pagination-size: 20px;
+$pagination-gap: 4px;
+$pagination-color: #8d8d8d;
+$pagination-disabled-color: #dbdbdb;
+$pagination-active-bg: $primary;
+$pagination-active-color: #fff;
+
+$range-color: #cbcbcb;
+$range-items-height: 3px;
+$range-item-size: 9px;
+$range-item-clickable-size: 16px;
+$range-thumb-size: 12px;
+
+$spinner-color: #fff;
+
+$steps-height: 40px;
+$steps-arrow: 10px;
+$steps-gap: 10px;
+$steps-bg: #ededed;
+$steps-color: #5E5E5E;
+$steps-active-bg: #98CBEF;
+$steps-active-color: #fff;
+$steps-current-bg: #3392D6;
+$steps-current-color: #fff;

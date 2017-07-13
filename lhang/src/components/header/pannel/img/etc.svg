@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 19.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="图层_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 1024 1024" style="enable-background:new 0 0 1024 1024;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:#6BBAF2;}
+	.st1{fill:#0093F1;}
+	.st2{fill:#196FAC;}
+</style>
+<g>
+	<g id="XMLID_345_">
+		<polygon id="XMLID_328_" class="st0" points="511.5,894.6 299.1,562.5 512,705.4 724.9,568.4 		"/>
+		<polygon id="XMLID_346_" class="st0" points="511.5,662 299.1,526 512,129.4 724.9,531.9 		"/>
+		<polygon id="XMLID_348_" class="st1" points="724.9,531.9 512,442.2 299.1,526 511.5,662 		"/>
+		<polygon id="XMLID_354_" class="st1" points="512,129.4 511.5,662 724.9,531.9 		"/>
+		<polygon id="XMLID_353_" class="st2" points="512,442.2 511.7,442.4 511.5,662 724.9,531.9 		"/>
+		<polygon id="XMLID_357_" class="st1" points="512,705.4 511.5,894.6 724.9,568.4 		"/>
+	</g>
+	<path id="XMLID_360_" class="st1" d="M512,0C229.2,0,0,229.2,0,512s229.2,512,512,512s512-229.2,512-512S794.8,0,512,0z M512,969.8
+		c-252.8,0-457.8-205-457.8-457.8S259.2,54.2,512,54.2s457.8,205,457.8,457.8S764.8,969.8,512,969.8z"/>
+</g>
+</svg>
