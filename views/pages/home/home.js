@@ -14,3 +14,20 @@ b.forEach((elem) => {
 });
 
 console.log(obj);
+
+let i = 0;
+while (i < 5) {
+    i++;
+    console.log(i + 1);
+}
+
+let k = 0;
+do {
+    k++;
+    console.log(k + 1);
+} while (k < 5);
+
+
+for (let j = 0; j < 5; j++) {
+    console.log(j + 1);
+}
