@@ -10,4 +10,4 @@ const obj = {
         return type + 1;
     }
 };
-export default obj;
+// export default obj;

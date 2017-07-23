@@ -39,12 +39,12 @@ let webpack_option = {
     },
     module: {
         loaders: [{
-                test: /\.css$/,
-                //配置css的抽取器、加载器。'-loader'可以省去
-                loader: ExtractTextPlugin.extract({ fallback: 'style-loader', use: 'css-loader' }),
-            },
+            test: /\.css$/,
+            //配置css的抽取器、加载器。'-loader'可以省去
+            loader: ExtractTextPlugin.extract({fallback: 'style-loader', use: 'css-loader'}),
+        },
             {
-                test: /\.(js|jsx)$/,
+                test: /\.(js|jsx|es6)$/,
                 loader: 'babel-loader',
                 query: {
                     presets: ['es2015', 'react']

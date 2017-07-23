@@ -3,34 +3,13 @@ import $ from 'jquery';
 
 
 function* hello() {
-    // yield $.get('/static/json/pagination.json');
-    yield 'world';
-    return 'ending';
+    yield $.get('/static/json/pagination.json');
+
 }
 let hlo = hello();
-console.log(hlo.next('a'));
-console.log(hlo.next());
 
+let requst = hlo.next().value;
 
-
-var arr = [1, [
-        [2, 3], 4
-    ],
-    [5, 6]
-];
-
-var flat = function*(a) {
-    var length = a.length;
-    for (var i = 0; i < length; i++) {
-        var item = a[i];
-        if (typeof item !== 'number') {
-            yield* flat(item);
-        } else {
-            yield item;
-        }
-    }
-};
-
-for (var f of flat(arr)) {
-    console.log(f);
-}
+requst.done(res => {
+    console.log(res);
+});
