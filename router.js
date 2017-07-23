@@ -9,6 +9,7 @@ let router_config = [
     ['/paging', '/paging'],
     ['/react-demo', '/react_demo'],
     ['/vue', '/vue'],
+    ['/swiper', '/swiper'],
 ];
 
 module.exports = router_config;
