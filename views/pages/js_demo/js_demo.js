@@ -28,4 +28,65 @@ $(document).on('click', function () {
     $('.barrage').css({transform: 'translateX(-1000%)'});
 });
 
-console.log('qunimeid');
+
+let data = [
+    {time: '123', txt1: 'werwe', txt2: '342343'},
+    {time: '123', txt1: 'werwe', txt2: '342343'},
+    {time: '123', txt1: 'werwe', txt2: '342343'},
+    {time: '1234', txt1: 'werwe', txt2: '342343'},
+    {time: '1235', txt1: 'werwe', txt2: '342343'},
+    {time: '1235', txt1: 'werwe', txt2: '342343'},
+];
+
+
+let reference = '';
+let arr = JSON.parse(JSON.stringify(data));
+let obj = {};
+
+data.forEach((elem) => {
+    let a = elem.time;
+    let r = obj[a];
+
+    if (r) {
+        obj[a] += 1
+    } else {
+        obj[a] = 1
+    }
+});
+
+arr.forEach((elem, i) => {
+    if (reference !== elem.time) {
+        arr[i].new_time = elem.time;
+        arr[i].rowspan = obj[elem.time];
+        reference = elem.time;
+    }
+});
+
+
+
+// let temp = '';
+// let cont = 0;
+// let arrobj = [];
+//
+// for (let i = 0; i < hh.length; i++) {
+//     if (hh[i] != -1) {
+//         temp = hh[i];
+//
+//         for (let j = 0; j < hh.length; j++) {
+//             if (temp === hh[j]) {
+//                 cont++;
+//                 hh[j] = -1;
+//             }
+//         }
+//     }
+//
+// }
+
+// console.log(arrobj);
+// console.log(hh);
+
+
+
+
+
+
